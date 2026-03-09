@@ -1,0 +1,1364 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>TubeWell Water — ABDUL AZIZ BHATTI</title>
+<style>
+:root {
+  --green:#1b5e20; --green2:#2e7d32; --green3:#388e3c; --greenL:#e8f5e9;
+  --blue:#0277bd; --blueL:#e3f2fd;
+  --orange:#e65100; --orangeL:#fff3e0;
+  --red:#c62828; --redL:#ffebee;
+  --teal:#00695c; --tealL:#e0f2f1;
+  --border:#dde5dd; --bg:#eef3ee; --card:#fff;
+  --t1:#1a1a1a; --t2:#444; --t3:#888;
+  --radius:14px; --rad:10px; --shadow:0 3px 16px rgba(0,0,0,.10);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',Tahoma,'Noto Nastaliq Urdu',sans-serif;background:var(--bg);color:var(--t1);min-height:100vh;padding-bottom:80px;direction:rtl;text-align:right;}
+/* HEADER */
+.hdr{background:linear-gradient(135deg,var(--green),var(--green3));color:#fff;padding:14px 16px 10px;position:sticky;top:0;z-index:100;box-shadow:0 3px 12px rgba(0,0,0,.25);}
+.hdr-row{display:flex;align-items:center;gap:10px;direction:ltr;}
+.hdr-icon{font-size:30px;line-height:1;}
+.hdr-title{font-size:19px;font-weight:800;line-height:1.1;letter-spacing:.3px;}
+.hdr-sub{font-size:11px;opacity:.85;font-weight:600;margin-top:1px;letter-spacing:.5px;}
+.hdr-right{margin-left:auto;display:flex;flex-direction:column;align-items:flex-end;gap:5px;}
+.hdr-date{font-size:12px;font-weight:700;opacity:.9;text-align:right;}
+.lang-btn{background:rgba(255,255,255,.25);border:1.5px solid rgba(255,255,255,.5);color:#fff;padding:4px 13px;border-radius:20px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit;transition:.2s;}
+.lang-btn:active{background:rgba(255,255,255,.4);}
+/* NAV */
+.nav{display:flex;overflow-x:auto;background:#fff;border-bottom:2px solid var(--border);position:sticky;top:72px;z-index:99;direction:ltr;}
+.nav::-webkit-scrollbar{display:none;}
+.ntab{flex:1;min-width:72px;padding:11px 6px;font-size:11px;font-weight:700;background:none;border:none;cursor:pointer;color:var(--t3);font-family:inherit;border-bottom:3px solid transparent;white-space:nowrap;transition:.2s;}
+.ntab.on{color:var(--green2);border-bottom-color:var(--green2);background:var(--greenL);}
+/* PAGES */
+.pg{display:none;padding:14px 12px;}
+.pg.on{display:block;}
+/* CARD */
+.card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:14px;overflow:hidden;}
+.ch{display:flex;align-items:center;gap:8px;padding:13px 15px;border-bottom:1px solid var(--border);background:linear-gradient(135deg,var(--greenL),#fff);}
+.ch h2{font-size:14px;font-weight:800;color:var(--green);}
+.ch .ci{font-size:20px;}
+.cb{padding:14px;}
+/* FORM */
+.fl{display:block;font-size:12px;font-weight:700;color:var(--t2);margin-bottom:5px;}
+.fi{width:100%;padding:11px 13px;border:1.5px solid var(--border);border-radius:var(--rad);font-size:14px;font-family:inherit;background:#fafafa;color:var(--t1);outline:none;transition:.2s;direction:rtl;text-align:right;}
+.fi:focus{border-color:var(--green2);background:#fff;box-shadow:0 0 0 3px rgba(46,125,50,.1);}
+.fg{margin-bottom:13px;}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+/* BUTTONS */
+.btn{padding:11px 16px;border-radius:var(--rad);border:none;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;transition:.15s;letter-spacing:.2px;}
+.btn-g{background:linear-gradient(135deg,var(--green2),var(--green3));color:#fff;box-shadow:0 2px 8px rgba(46,125,50,.3);}
+.btn-g:active{background:var(--green);}
+.btn-o{background:#fff;color:var(--t2);border:1.5px solid var(--border);}
+.btn-b{background:var(--blue);color:#fff;}
+.btn-r{background:var(--redL);color:var(--red);}
+.btn-y{background:#fff9c4;color:#7c4800;}
+.btn-full{width:100%;}
+.btn-big{padding:15px;font-size:15px;}
+.bgrp{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+/* AUTOCOMPLETE */
+.ac-wrap{position:relative;}
+.ac-list{position:absolute;top:100%;left:0;right:0;background:#fff;border:1.5px solid var(--green2);border-top:none;border-radius:0 0 var(--rad) var(--rad);z-index:200;max-height:200px;overflow-y:auto;box-shadow:0 4px 12px rgba(0,0,0,.1);}
+.ac-item{padding:10px 14px;cursor:pointer;border-bottom:1px solid var(--border);font-size:13px;}
+.ac-item:hover,.ac-item:active{background:var(--greenL);}
+/* INLINE AC (payment page) */
+.iac{display:none;border:1.5px solid var(--green2);border-top:none;border-radius:0 0 var(--rad) var(--rad);background:#fff;max-height:220px;overflow-y:auto;}
+.iac-item{padding:11px 14px;cursor:pointer;border-bottom:1px solid var(--border);font-size:13px;}
+.iac-item:hover,.iac-item:active{background:var(--greenL);}
+/* SUMMARY GRID */
+.sgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;}
+.scard{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px;text-align:center;}
+.scard.full{grid-column:1/-1;}
+.scard.g{border-top:4px solid var(--green2);}
+.scard.b{border-top:4px solid var(--blue);}
+.scard.t{border-top:4px solid var(--teal);}
+.scard.o{border-top:4px solid var(--orange);}
+.sicon{font-size:26px;margin-bottom:6px;}
+.slbl{font-size:11px;font-weight:700;color:var(--t3);margin-bottom:5px;}
+.sval{font-size:26px;font-weight:800;color:var(--t1);line-height:1;}
+.sval.sm{font-size:20px;}
+.ssub{font-size:10px;color:var(--t3);margin-top:4px;}
+/* RECORD CARD */
+.rc{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);border:1.5px solid var(--border);margin-bottom:12px;overflow:hidden;}
+.rc-top{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border-bottom:1px solid var(--border);direction:rtl;}
+.rc-name{font-size:14px;font-weight:800;color:var(--green2);cursor:pointer;}
+.rc-phone{font-size:11px;color:var(--t3);margin-top:2px;}
+.rc-amt{background:linear-gradient(135deg,var(--green2),var(--green3));color:#fff;padding:6px 14px;border-radius:20px;font-size:13px;font-weight:800;box-shadow:0 2px 6px rgba(46,125,50,.25);}
+.rc-grid{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--border);}
+.rc-cell{padding:9px 14px;border-left:1px solid var(--border);}
+.rc-cell:nth-child(2n){border-left:none;}
+.rc-cell:nth-child(n+3){border-top:1px solid var(--border);}
+.rc-cl{font-size:10px;color:var(--t3);font-weight:600;}
+.rc-cv{font-size:12px;font-weight:700;margin-top:2px;}
+.rc-status{padding:9px 14px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);}
+.rc-actions{display:grid;grid-template-columns:1fr 1fr 1fr;border-top:0;}
+.rc-act{background:#fff;border:none;padding:12px 4px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;border-left:1px solid var(--border);}
+.rc-act:first-child{border-left:none;}
+.rc-act.receipt{background:#fff9c4;color:#7c4800;}
+.rc-act.edit{background:var(--greenL);color:var(--green);}
+.rc-act.del{background:var(--redL);color:var(--red);}
+/* CALC BOX */
+.cbox{background:linear-gradient(135deg,var(--greenL),#fff);border:1.5px solid var(--border);border-radius:var(--rad);padding:12px;margin-bottom:12px;}
+.crow{display:flex;justify-content:space-between;padding:4px 0;font-size:13px;}
+.crow.tot{border-top:1.5px solid var(--border);margin-top:4px;padding-top:8px;font-weight:800;font-size:15px;color:var(--green);}
+/* PAY PREVIEW */
+.pay-prev{background:linear-gradient(135deg,#fff9e6,#fff);border:2px solid #ffcc80;border-radius:var(--rad);padding:13px;margin-bottom:12px;display:none;}
+/* MODAL */
+.mol{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:500;align-items:flex-end;justify-content:center;}
+.mol.on{display:flex;}
+.modal{background:#fff;border-radius:var(--radius) var(--radius) 0 0;width:100%;max-width:480px;max-height:90vh;overflow-y:auto;padding:0 0 20px;}
+.mh{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--border);background:linear-gradient(135deg,var(--greenL),#fff);position:sticky;top:0;}
+.mt{font-size:15px;font-weight:800;color:var(--green);}
+.mc{background:none;border:none;font-size:20px;cursor:pointer;color:var(--t2);padding:2px 6px;border-radius:6px;}
+.mbody{padding:16px;}
+/* CUSTOMER DETAIL MODAL */
+.cd-hdr{background:linear-gradient(135deg,var(--green),var(--green3));color:#fff;padding:16px;}
+.cd-hdr h3{font-size:18px;font-weight:800;}
+.cd-hdr p{font-size:12px;opacity:.8;margin-top:3px;}
+.cd-bal{background:linear-gradient(135deg,var(--orangeL),#ffe0b2);border:2px solid #ff8f00;border-radius:var(--rad);padding:14px;margin:12px 0;}
+.stat-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:12px;}
+.stat-box{background:var(--greenL);border-radius:var(--rad);padding:10px;text-align:center;}
+.sv{font-size:16px;font-weight:800;color:var(--green);}
+.sk{font-size:10px;color:var(--t3);margin-top:2px;font-weight:600;}
+/* TIMELINE */
+.tline{border:1px solid var(--border);border-radius:var(--rad);overflow:hidden;}
+.te{padding:10px 12px;border-bottom:1px solid var(--border);font-size:12px;}
+.te:last-child{border-bottom:none;}
+.te.bill{background:#fff;}
+.te.pay{background:var(--greenL);}
+/* RECEIPT */
+.receipt{font-family:monospace;background:#fafafa;border:1px solid var(--border);border-radius:var(--rad);padding:16px;font-size:12px;line-height:1.7;}
+/* HISTORY PAGE */
+.hcust{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);border:1.5px solid var(--border);margin-bottom:10px;overflow:hidden;cursor:pointer;}
+.hcust-h{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;}
+.hcust-n{font-size:14px;font-weight:800;color:var(--green2);}
+.hcust-p{font-size:11px;color:var(--t3);}
+/* TOAST */
+.toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:#222;color:#fff;padding:12px 26px;border-radius:26px;font-size:13px;font-weight:700;z-index:999;opacity:0;transition:.3s;pointer-events:none;white-space:nowrap;box-shadow:0 4px 16px rgba(0,0,0,.3);}
+.toast.show{opacity:1;}
+/* EMPTY */
+.empty{text-align:center;padding:44px 20px;color:var(--t3);}
+.empty-ic{font-size:52px;margin-bottom:12px;}
+.empty-t{font-size:15px;font-weight:700;margin-bottom:5px;color:var(--t2);}
+.empty-s{font-size:12px;}
+/* PAYMENT EDIT ROW */
+.pay-row{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:1px solid var(--border);}
+.pay-row:last-child{border-bottom:none;}
+.pay-btns{display:flex;gap:6px;align-items:center;}
+.ibtn{border:none;padding:4px 9px;border-radius:6px;font-size:11px;font-weight:700;cursor:pointer;}
+.ibtn.e{background:var(--greenL);color:var(--green);}
+.ibtn.d{background:var(--redL);color:var(--red);}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="hdr">
+  <div class="hdr-row">
+    <div class="hdr-icon">💧</div>
+    <div>
+      <div class="hdr-title">TubeWell Water</div>
+      <div class="hdr-sub">ABDUL AZIZ BHATTI</div>
+    </div>
+    <div class="hdr-right">
+      <div class="hdr-date" id="hdrDate"></div>
+      <button class="lang-btn" id="langBtn" onclick="toggleLang()">EN | اردو</button>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<div class="nav">
+  <button class="ntab on" onclick="showPg('dashboard')" data-ur="🏠 ڈیش" data-en="🏠 Home">🏠 ڈیش</button>
+  <button class="ntab" onclick="showPg('sale')" data-ur="💧 فروخت" data-en="💧 Sale">💧 فروخت</button>
+  <button class="ntab" onclick="showPg('records')" data-ur="📋 ریکارڈ" data-en="📋 Records">📋 ریکارڈ</button>
+  <button class="ntab" onclick="showPg('history')" data-ur="👤 تاریخ" data-en="👤 History">👤 تاریخ</button>
+  <button class="ntab" onclick="showPg('reports')" data-ur="📊 رپورٹ" data-en="📊 Reports">📊 رپورٹ</button>
+  <button class="ntab" onclick="showPg('payment')" data-ur="💳 ادائیگی" data-en="💳 Payment">💳 ادائیگی</button>
+</div>
+
+<!-- ═══ DASHBOARD ═══ -->
+<div class="pg on" id="pg-dashboard">
+  <div class="sgrid">
+    <div class="scard g">
+      <div class="sicon">⏱️</div>
+      <div class="slbl" data-ur="آج کا وقت" data-en="Today Time">آج کا وقت</div>
+      <div class="sval sm" id="d-time">--:--</div>
+      <div class="ssub" data-ur="گھنٹے:منٹ" data-en="Hrs:Min">گھنٹے:منٹ</div>
+    </div>
+    <div class="scard b">
+      <div class="sicon">💰</div>
+      <div class="slbl" data-ur="آج کی آمدنی" data-en="Today Income">آج کی آمدنی</div>
+      <div class="sval sm" id="d-income">Rs 0</div>
+      <div class="ssub" data-ur="روپے" data-en="Rupees">روپے</div>
+    </div>
+    <div class="scard t">
+      <div class="sicon">👥</div>
+      <div class="slbl" data-ur="کل گاہک" data-en="Customers">کل گاہک</div>
+      <div class="sval" id="d-custs">0</div>
+    </div>
+    <div class="scard o">
+      <div class="sicon">📒</div>
+      <div class="slbl" data-ur="کل ریکارڈ" data-en="Total Records">کل ریکارڈ</div>
+      <div class="sval" id="d-recs">0</div>
+    </div>
+    <div class="scard full" style="border:2px solid var(--orange);">
+      <div class="sicon">⚠️</div>
+      <div class="slbl" data-ur="کل بقایا (تمام گاہک)" data-en="Total Pending Balance">کل بقایا (تمام گاہک)</div>
+      <div class="sval" id="d-bal" style="color:var(--orange);font-size:28px;">Rs 0</div>
+      <div class="ssub" data-ur="جتنی رقم ابھی وصول نہیں ہوئی" data-en="Total unpaid amount">جتنی رقم ابھی وصول نہیں ہوئی</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="ch"><span class="ci">📋</span><h2 data-ur="حالیہ ریکارڈ" data-en="Recent Records">حالیہ ریکارڈ</h2></div>
+    <div id="d-recent" style="padding:4px 0 0;"></div>
+  </div>
+</div>
+
+<!-- ═══ SALE ═══ -->
+<div class="pg" id="pg-sale">
+  <div class="card">
+    <div class="ch"><span class="ci">👤</span><h2 data-ur="گاہک کی معلومات" data-en="Customer Info">گاہک کی معلومات</h2></div>
+    <div class="cb">
+      <div class="fg">
+        <label class="fl" data-ur="👤 گاہک کا نام *" data-en="👤 Customer Name *">👤 گاہک کا نام *</label>
+        <input class="fi" id="sName" type="text" autocomplete="off"
+          data-pur="مثلاً: احمد علی" data-pen="e.g. Ahmad Ali" placeholder="مثلاً: احمد علی">
+      </div>
+      <div class="fg ac-wrap">
+        <label class="fl" data-ur="📱 فون نمبر *" data-en="📱 Phone Number *">📱 فون نمبر *</label>
+        <input class="fi" id="sPhone" type="tel" autocomplete="off"
+          placeholder="0300-1234567" oninput="onPhoneInput()" onblur="setTimeout(closeAC,250)" style="direction:ltr;text-align:left;">
+        <div class="ac-list" id="phoneAC" style="display:none;"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span class="ci">✏️</span><h2 data-ur="پانی کا وقت درج کریں" data-en="Enter Water Time">پانی کا وقت درج کریں</h2></div>
+    <div class="cb">
+      <div class="frow">
+        <div class="fg">
+          <label class="fl" data-ur="📅 تاریخ" data-en="📅 Date">📅 تاریخ</label>
+          <input class="fi" id="sDate" type="date">
+        </div>
+        <div class="fg">
+          <label class="fl" data-ur="💰 فی گھنٹہ ریٹ" data-en="💰 Rate/Hr">💰 فی گھنٹہ ریٹ</label>
+          <input class="fi" id="sRate" type="number" placeholder="500" oninput="calcM()">
+        </div>
+      </div>
+      <div class="frow">
+        <div class="fg">
+          <label class="fl" data-ur="🟢 شروع وقت" data-en="🟢 Start Time">🟢 شروع وقت</label>
+          <input class="fi" id="sStart" type="time" step="1" onchange="calcM()" style="direction:ltr;text-align:left;">
+        </div>
+        <div class="fg">
+          <label class="fl" data-ur="🔴 ختم وقت" data-en="🔴 End Time">🔴 ختم وقت</label>
+          <input class="fi" id="sEnd" type="time" step="1" onchange="calcM()" style="direction:ltr;text-align:left;">
+        </div>
+      </div>
+
+      <div id="sCalcHint" style="text-align:center;padding:12px;color:var(--t3);font-size:13px;">
+        ⏰ <span data-ur="وقت درج کریں تو حساب نظر آئے گا" data-en="Enter time to see calculation">وقت درج کریں تو حساب نظر آئے گا</span>
+      </div>
+      <div class="cbox" id="sCalcBox" style="display:none;">
+        <div class="crow"><span data-ur="مدت" data-en="Duration">مدت</span><span id="sc-dur">--</span></div>
+        <div class="crow"><span data-ur="شروع" data-en="Start">شروع</span><span id="sc-start">--</span></div>
+        <div class="crow"><span data-ur="ختم" data-en="End">ختم</span><span id="sc-end">--</span></div>
+        <div class="crow tot"><span data-ur="💵 کل رقم" data-en="💵 Total">💵 کل رقم</span><span id="sc-total">Rs 0</span></div>
+      </div>
+
+      <div style="background:var(--greenL);border:1.5px solid var(--border);border-radius:var(--rad);padding:12px;margin-bottom:12px;">
+        <div style="font-size:12px;font-weight:700;color:var(--green);margin-bottom:8px;" data-ur="💰 ابھی کتنی رقم وصول ہوئی؟" data-en="💰 How much collected now?">💰 ابھی کتنی رقم وصول ہوئی؟</div>
+        <input class="fi" id="sPayNow" type="number" min="0"
+          data-pur="0 — خالی چھوڑیں اگر ابھی نہیں دی" data-pen="0 — leave blank if not paid now"
+          placeholder="0 — خالی چھوڑیں اگر ابھی ادا نہیں ہوئی" oninput="previewBal()">
+        <div class="pay-prev" id="sPayPrev">
+          <div style="display:flex;gap:8px;margin-top:8px;">
+            <div style="flex:1;background:var(--greenL);border-radius:6px;padding:8px;text-align:center;">
+              <div style="font-size:10px;font-weight:700;color:var(--t3);" data-ur="ادا" data-en="Paid">ادا</div>
+              <div style="font-size:15px;font-weight:800;color:var(--green);" id="sPaidShow">Rs 0</div>
+            </div>
+            <div style="flex:1;background:var(--orangeL);border-radius:6px;padding:8px;text-align:center;">
+              <div style="font-size:10px;font-weight:700;color:var(--t3);" data-ur="بقایا" data-en="Remaining">بقایا</div>
+              <div style="font-size:15px;font-weight:800;color:var(--orange);" id="sRemain">Rs 0</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="btn btn-g btn-full btn-big" onclick="saveRec()">
+        💾 <span data-ur="ریکارڈ محفوظ کریں" data-en="Save Record">ریکارڈ محفوظ کریں</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ RECORDS ═══ -->
+<div class="pg" id="pg-records">
+  <div class="card">
+    <div class="ch"><span class="ci">📋</span><h2 data-ur="تمام ریکارڈ" data-en="All Records">تمام ریکارڈ</h2></div>
+    <div class="cb" style="padding-bottom:8px;">
+      <input class="fi" id="recSearch"
+        data-pur="نام یا فون سے تلاش..." data-pen="Search by name or phone..."
+        placeholder="نام یا فون سے تلاش..." oninput="renderRecs()" style="margin-bottom:0;">
+    </div>
+  </div>
+  <div id="recs-body"></div>
+</div>
+
+<!-- ═══ HISTORY ═══ -->
+<div class="pg" id="pg-history">
+  <div class="card">
+    <div class="ch"><span class="ci">👤</span><h2 data-ur="گاہک کی تلاش" data-en="Customer Search">گاہک کی تلاش</h2></div>
+    <div class="cb">
+      <input class="fi" id="histSearch"
+        data-pur="نام یا فون نمبر..." data-pen="Name or phone..."
+        placeholder="نام یا فون نمبر..." oninput="renderHist()">
+    </div>
+  </div>
+  <div id="hist-body"></div>
+</div>
+
+<!-- ═══ REPORTS ═══ -->
+<div class="pg" id="pg-reports">
+  <div class="card">
+    <div class="ch"><span class="ci">📊</span><h2 data-ur="تاریخ رپورٹ" data-en="Date Report">تاریخ رپورٹ</h2></div>
+    <div class="cb">
+      <div class="frow">
+        <div class="fg">
+          <label class="fl" data-ur="📅 شروع تاریخ" data-en="📅 From Date">📅 شروع تاریخ</label>
+          <input class="fi" id="rFrom" type="date">
+        </div>
+        <div class="fg">
+          <label class="fl" data-ur="📅 ختم تاریخ" data-en="📅 To Date">📅 ختم تاریخ</label>
+          <input class="fi" id="rTo" type="date">
+        </div>
+      </div>
+      <div class="frow" style="margin-bottom:10px;">
+        <button class="btn btn-o" onclick="setRange('today')" data-ur="آج" data-en="Today">آج</button>
+        <button class="btn btn-o" onclick="setRange('week')" data-ur="اس ہفتے" data-en="This Week">اس ہفتے</button>
+        <button class="btn btn-o" onclick="setRange('month')" data-ur="اس مہینے" data-en="This Month">اس مہینے</button>
+        <button class="btn btn-o" onclick="setRange('all')" data-ur="سب" data-en="All">سب</button>
+      </div>
+      <button class="btn btn-g btn-full" onclick="genReport()">
+        📊 <span data-ur="رپورٹ بنائیں" data-en="Generate Report">رپورٹ بنائیں</span>
+      </button>
+      <div id="rep-result" style="margin-top:12px;"></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="ch"><span class="ci">📥</span><h2 data-ur="ڈاؤن لوڈ" data-en="Download">ڈاؤن لوڈ</h2></div>
+    <div class="cb">
+      <div class="bgrp">
+        <button class="btn btn-g" onclick="exportCSV()">📊 CSV</button>
+        <button class="btn btn-b" onclick="exportXLS()">📑 Excel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ PAYMENT ═══ -->
+<div class="pg" id="pg-payment">
+  <div class="card">
+    <div class="ch"><span class="ci">💳</span><h2 data-ur="ادائیگی درج کریں" data-en="Add Payment">ادائیگی درج کریں</h2></div>
+    <div class="cb" style="padding-bottom:0;">
+      <label class="fl" data-ur="📱 فون نمبر / نام" data-en="📱 Phone / Name">📱 فون نمبر / نام</label>
+      <input class="fi" id="ppSearch" type="text" autocomplete="off"
+        data-pur="گاہک کا نام یا فون نمبر لکھیں..." data-pen="Search by phone or name..."
+        placeholder="گاہک کا نام یا فون نمبر لکھیں..." oninput="ppSearchFn()" style="margin-bottom:0;direction:rtl;">
+    </div>
+    <div class="iac" id="ppAC"></div>
+  </div>
+
+  <div id="ppForm" style="display:none;">
+    <div class="card">
+      <div style="background:linear-gradient(135deg,var(--green),var(--green3));color:#fff;padding:14px 16px;">
+        <div style="font-size:17px;font-weight:800;" id="ppName">--</div>
+        <div style="font-size:12px;opacity:.8;margin-top:2px;" id="ppPhone">--</div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;">
+        <div style="padding:12px 14px;border-left:1px solid var(--border);border-bottom:1px solid var(--border);">
+          <div class="slbl" data-ur="💰 کل بل" data-en="💰 Total Bill">💰 کل بل</div>
+          <div style="font-size:18px;font-weight:800;color:var(--green);" id="ppBill">Rs 0</div>
+        </div>
+        <div style="padding:12px 14px;border-bottom:1px solid var(--border);">
+          <div class="slbl" data-ur="✅ ادا شدہ" data-en="✅ Amount Paid">✅ ادا شدہ</div>
+          <div style="font-size:18px;font-weight:800;color:var(--teal);" id="ppPaid">Rs 0</div>
+        </div>
+        <div style="padding:12px 14px;border-left:1px solid var(--border);">
+          <div class="slbl" data-ur="📅 آخری ادائیگی" data-en="📅 Last Payment">📅 آخری ادائیگی</div>
+          <div style="font-size:13px;font-weight:800;color:var(--blue);" id="ppLast">--</div>
+        </div>
+        <div style="padding:12px 14px;background:linear-gradient(135deg,var(--orangeL),#fff2e2);">
+          <div class="slbl" data-ur="⚠️ بقایا رقم" data-en="⚠️ Amount Due">⚠️ بقایا رقم</div>
+          <div style="font-size:24px;font-weight:800;color:var(--orange);" id="ppDue">Rs 0</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="ch"><span class="ci">💵</span><h2 data-ur="نئی ادائیگی" data-en="New Payment">نئی ادائیگی</h2></div>
+      <div class="cb">
+        <div class="frow">
+          <div class="fg">
+            <label class="fl" data-ur="💰 رقم (Rs)" data-en="💰 Amount (Rs)">💰 رقم (Rs)</label>
+            <input class="fi" id="ppAmt" type="number" placeholder="5000" min="1"
+              style="font-size:18px;font-weight:800;direction:ltr;text-align:left;" oninput="ppPreview()">
+          </div>
+          <div class="fg">
+            <label class="fl" data-ur="📅 تاریخ" data-en="📅 Date">📅 تاریخ</label>
+            <input class="fi" id="ppDate" type="date" style="direction:ltr;text-align:left;">
+          </div>
+        </div>
+        <div style="margin-bottom:10px;">
+          <button class="btn btn-o btn-full" style="font-size:12px;padding:8px;" onclick="fillFullDue()">
+            ⚡ <span data-ur="پوری بقایا رقم بھریں" data-en="Fill full due amount">پوری بقایا رقم بھریں</span>
+          </button>
+        </div>
+        <div id="ppPrev" class="pay-prev">
+          <div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid var(--border);">
+            <span style="font-size:12px;font-weight:700;color:var(--t2);" data-ur="ادا ہونے والی رقم" data-en="Amount to be paid">ادا ہونے والی رقم</span>
+            <span style="font-size:16px;font-weight:800;color:var(--green);" id="ppPrevPaid">Rs 0</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;padding:6px 0 0;">
+            <span style="font-size:12px;font-weight:700;color:var(--t2);" data-ur="باقی ماندہ بقایا" data-en="Remaining Balance">باقی ماندہ بقایا</span>
+            <span style="font-size:20px;font-weight:800;color:var(--orange);" id="ppPrevRem">Rs 0</span>
+          </div>
+        </div>
+        <button class="btn btn-g btn-full btn-big" onclick="savePP()">
+          💾 <span data-ur="ادائیگی محفوظ کریں" data-en="Save Payment">ادائیگی محفوظ کریں</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="ch"><span class="ci">📋</span><h2 data-ur="ادائیگی کی تاریخ" data-en="Payment History">ادائیگی کی تاریخ</h2></div>
+      <div id="ppHist"></div>
+    </div>
+  </div>
+
+  <div id="ppEmpty">
+    <div class="empty">
+      <div class="empty-ic">💳</div>
+      <div class="empty-t" data-ur="ادائیگی درج کریں" data-en="Add Payment">ادائیگی درج کریں</div>
+      <div class="empty-s" data-ur="اوپر گاہک تلاش کریں" data-en="Search customer above">اوپر گاہک تلاش کریں</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ MODALS ═══════════ -->
+
+<!-- Customer Detail -->
+<div class="mol" id="mol-cust">
+  <div class="modal">
+    <div class="cd-hdr">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+        <div><h3 id="cd-name">--</h3><p id="cd-phone">--</p></div>
+        <button class="mc" style="color:#fff;" onclick="closeMol('mol-cust')">✕</button>
+      </div>
+    </div>
+    <div style="padding:14px;">
+      <div class="cd-bal">
+        <div style="font-size:11px;font-weight:700;color:#7c4800;" data-ur="📒 کل بقایا" data-en="📒 Total Due">📒 کل بقایا</div>
+        <div style="font-size:28px;font-weight:800;color:var(--orange);" id="cd-bal">Rs 0</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-box"><div class="sv" id="cd-time">--</div><div class="sk" data-ur="کل وقت" data-en="Total Time">کل وقت</div></div>
+        <div class="stat-box"><div class="sv" id="cd-total">--</div><div class="sk" data-ur="کل بل" data-en="Total Bill">کل بل</div></div>
+        <div class="stat-box" style="background:var(--tealL);"><div class="sv" style="color:var(--teal);" id="cd-paid">--</div><div class="sk" data-ur="کل ادا" data-en="Total Paid">کل ادا</div></div>
+      </div>
+      <button class="btn btn-g btn-full" style="margin-bottom:12px;" onclick="openAddPay()">
+        💵 <span data-ur="رقم جمع کروائیں" data-en="Add Payment">رقم جمع کروائیں</span>
+      </button>
+      <div id="addPayForm" style="display:none;background:var(--greenL);border:1.5px solid var(--border);border-radius:var(--rad);padding:12px;margin-bottom:12px;">
+        <div style="font-size:12px;font-weight:700;color:var(--green);margin-bottom:8px;" data-ur="💰 رقم جمع کروائیں" data-en="💰 Add Payment">💰 رقم جمع کروائیں</div>
+        <div class="frow" style="margin-bottom:8px;">
+          <div><input class="fi" id="apAmt" type="number" placeholder="5000" min="1"></div>
+          <div><input class="fi" id="apDate" type="date"></div>
+        </div>
+        <div class="bgrp">
+          <button class="btn btn-o" onclick="closeAddPay()" data-ur="منسوخ" data-en="Cancel">منسوخ</button>
+          <button class="btn btn-g" onclick="submitPay()">✅ <span data-ur="محفوظ" data-en="Save">محفوظ</span></button>
+        </div>
+      </div>
+      <div style="font-size:11px;font-weight:700;color:var(--t2);margin-bottom:8px;" data-ur="📋 مکمل کھاتہ" data-en="📋 Full Ledger">📋 مکمل کھاتہ</div>
+      <div id="cd-ledger" class="tline"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Record -->
+<div class="mol" id="mol-editRec">
+  <div class="modal">
+    <div class="mh">
+      <div class="mt">✏️ <span data-ur="ریکارڈ ترمیم" data-en="Edit Record">ریکارڈ ترمیم</span></div>
+      <button class="mc" onclick="closeMol('mol-editRec')">✕</button>
+    </div>
+    <div class="mbody">
+      <input type="hidden" id="er-id">
+      <div class="fg">
+        <label class="fl" data-ur="👤 گاہک کا نام" data-en="👤 Name">👤 گاہک کا نام</label>
+        <input class="fi" id="er-name" type="text">
+      </div>
+      <div class="fg">
+        <label class="fl" data-ur="📱 فون نمبر" data-en="📱 Phone">📱 فون نمبر</label>
+        <input class="fi" id="er-phone" type="tel">
+      </div>
+      <div class="frow">
+        <div class="fg">
+          <label class="fl" data-ur="📅 تاریخ" data-en="📅 Date">📅 تاریخ</label>
+          <input class="fi" id="er-date" type="date">
+        </div>
+        <div class="fg">
+          <label class="fl" data-ur="💰 ریٹ/گھنٹہ" data-en="💰 Rate/Hr">💰 ریٹ/گھنٹہ</label>
+          <input class="fi" id="er-rate" type="number" oninput="erCalc()">
+        </div>
+      </div>
+      <div class="frow">
+        <div class="fg">
+          <label class="fl" data-ur="🟢 شروع وقت" data-en="🟢 Start">🟢 شروع وقت</label>
+          <input class="fi" id="er-start" type="time" step="1" oninput="erCalc()">
+        </div>
+        <div class="fg">
+          <label class="fl" data-ur="🔴 ختم وقت" data-en="🔴 End">🔴 ختم وقت</label>
+          <input class="fi" id="er-end" type="time" step="1" oninput="erCalc()">
+        </div>
+      </div>
+      <div class="cbox">
+        <div class="crow tot">
+          <span data-ur="⚙️ خودکار رقم" data-en="⚙️ Auto Amount">⚙️ خودکار رقم</span>
+          <span id="er-calc">Rs 0</span>
+        </div>
+      </div>
+      <div class="fg">
+        <label class="fl" data-ur="💵 رقم خود لکھیں (خالی = خودکار)" data-en="💵 Custom Amount (empty = auto)">💵 رقم خود لکھیں (خالی = خودکار)</label>
+        <input class="fi" id="er-amt" type="number" placeholder="مثلاً 1500" min="0" style="font-size:16px;font-weight:700;">
+      </div>
+      <div class="bgrp" style="margin-top:4px;">
+        <button class="btn btn-o" onclick="closeMol('mol-editRec')" data-ur="منسوخ" data-en="Cancel">منسوخ</button>
+        <button class="btn btn-g" onclick="saveEditRec()">💾 <span data-ur="محفوظ کریں" data-en="Save">محفوظ کریں</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Payment -->
+<div class="mol" id="mol-editPay">
+  <div class="modal">
+    <div class="mh">
+      <div class="mt">✏️ <span data-ur="ادائیگی ترمیم" data-en="Edit Payment">ادائیگی ترمیم</span></div>
+      <button class="mc" onclick="closeMol('mol-editPay')">✕</button>
+    </div>
+    <div class="mbody">
+      <input type="hidden" id="ep-id">
+      <div class="frow">
+        <div class="fg">
+          <label class="fl" data-ur="💰 رقم (Rs)" data-en="💰 Amount (Rs)">💰 رقم (Rs)</label>
+          <input class="fi" id="ep-amt" type="number" style="font-size:18px;font-weight:700;">
+        </div>
+        <div class="fg">
+          <label class="fl" data-ur="📅 تاریخ" data-en="📅 Date">📅 تاریخ</label>
+          <input class="fi" id="ep-date" type="date">
+        </div>
+      </div>
+      <div class="bgrp" style="margin-top:4px;">
+        <button class="btn btn-o" onclick="closeMol('mol-editPay')" data-ur="منسوخ" data-en="Cancel">منسوخ</button>
+        <button class="btn btn-g" onclick="saveEditPay()">💾 <span data-ur="محفوظ کریں" data-en="Save">محفوظ کریں</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Receipt -->
+<div class="mol" id="mol-receipt">
+  <div class="modal">
+    <div class="mh">
+      <div class="mt">🧾 <span data-ur="رسید" data-en="Receipt">رسید</span></div>
+      <button class="mc" onclick="closeMol('mol-receipt')">✕</button>
+    </div>
+    <div class="mbody">
+      <div class="receipt" id="receiptHTML"></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px;">
+        <button class="btn btn-g" style="grid-column:1/-1;" onclick="printR()">🖨️ <span data-ur="پرنٹ کریں" data-en="Print">پرنٹ کریں</span></button>
+        <button class="btn btn-b" onclick="waR()">📲 واٹس ایپ</button>
+        <button class="btn btn-o" onclick="closeMol('mol-receipt')" data-ur="بند کریں" data-en="Close">بند کریں</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+<script>
+// ═══════════════════════════════════════════
+// DATA
+// ═══════════════════════════════════════════
+const SK = 'twRecords', PK = 'twPayments';
+let recs = JSON.parse(localStorage.getItem(SK) || '[]');
+let pays = JSON.parse(localStorage.getItem(PK) || '[]');
+let _cdPhone = '', _ppPhone = '', curLang = localStorage.getItem('twLang') || 'ur';
+
+function saveR() { localStorage.setItem(SK, JSON.stringify(recs)); }
+function saveP() { localStorage.setItem(PK, JSON.stringify(pays)); }
+
+// ═══════════════════════════════════════════
+// BALANCE HELPERS
+// ═══════════════════════════════════════════
+function getBal(phone) {
+  const bill = recs.filter(r => r.phone === phone).reduce((s,r) => s + r.amount, 0);
+  const paid = pays.filter(p => p.phone === phone).reduce((s,p) => s + p.amount, 0)
+             + recs.filter(r => r.phone === phone).reduce((s,r) => s + (r.paidNow || 0), 0);
+  return Math.max(0, bill - paid);
+}
+function getCredit(phone) {
+  const bill = recs.filter(r => r.phone === phone).reduce((s,r) => s + r.amount, 0);
+  const paid = pays.filter(p => p.phone === phone).reduce((s,p) => s + p.amount, 0)
+             + recs.filter(r => r.phone === phone).reduce((s,r) => s + (r.paidNow || 0), 0);
+  return Math.max(0, paid - bill);
+}
+function getTotalPaid(phone) {
+  return pays.filter(p => p.phone === phone).reduce((s,p) => s + p.amount, 0)
+       + recs.filter(r => r.phone === phone).reduce((s,r) => s + (r.paidNow || 0), 0);
+}
+function getTotalBill(phone) {
+  return recs.filter(r => r.phone === phone).reduce((s,r) => s + r.amount, 0);
+}
+
+// ═══════════════════════════════════════════
+// UTILS
+// ═══════════════════════════════════════════
+function pad(n) { return String(n).padStart(2,'0'); }
+function tms(t) {
+  const p = t.split(':').map(Number);
+  return ((p[0]||0)*3600 + (p[1]||0)*60 + (p[2]||0)) * 1000;
+}
+function fmtDur(ms) {
+  const s = Math.floor(ms/1000), h = Math.floor(s/3600), m = Math.floor((s%3600)/60), sec = s%60;
+  return pad(h)+':'+pad(m)+':'+pad(sec);
+}
+function fmtHM(ms) {
+  const h = Math.floor(ms/3600000), m = Math.floor((ms%3600000)/60000);
+  return pad(h)+':'+pad(m);
+}
+function fmt12(t) {
+  const p = t.split(':').map(Number);
+  const h = p[0], m = p[1], ap = h >= 12 ? 'PM' : 'AM';
+  return pad(h%12||12)+':'+pad(m)+' '+ap;
+}
+function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function toast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+function todayStr() {
+  const d = new Date();
+  return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());
+}
+
+// ═══════════════════════════════════════════
+// NAVIGATION
+// ═══════════════════════════════════════════
+function showPg(id) {
+  document.querySelectorAll('.pg').forEach(p => p.classList.remove('on'));
+  document.querySelectorAll('.ntab').forEach(t => t.classList.remove('on'));
+  document.getElementById('pg-'+id).classList.add('on');
+  const tabs = document.querySelectorAll('.ntab');
+  const order = ['dashboard','sale','records','history','reports','payment'];
+  const idx = order.indexOf(id);
+  if (idx >= 0) tabs[idx].classList.add('on');
+  if (id === 'records') renderRecs();
+  if (id === 'history') renderHist();
+  if (id === 'dashboard') updateDash();
+  if (id === 'payment') { resetPP(); }
+}
+
+// ═══════════════════════════════════════════
+// MODALS
+// ═══════════════════════════════════════════
+function openMol(id) { document.getElementById(id).classList.add('on'); }
+function closeMol(id) { document.getElementById(id).classList.remove('on'); }
+
+// ═══════════════════════════════════════════
+// DASHBOARD
+// ═══════════════════════════════════════════
+function updateDash() {
+  const today = todayStr();
+  const todayRecs = recs.filter(r => r.date === today);
+  const totalMs = todayRecs.reduce((s,r) => s + r.durationMs, 0);
+  const income = todayRecs.reduce((s,r) => s + r.amount, 0);
+  const phones = [...new Set(recs.map(r => r.phone))];
+  const totalBal = phones.reduce((s,p) => s + getBal(p), 0);
+
+  document.getElementById('d-time').textContent = fmtHM(totalMs);
+  document.getElementById('d-income').textContent = 'Rs ' + income.toFixed(0);
+  document.getElementById('d-custs').textContent = phones.length;
+  document.getElementById('d-recs').textContent = recs.length;
+  document.getElementById('d-bal').textContent = 'Rs ' + totalBal.toFixed(0);
+
+  // Recent records (last 5)
+  const recent = [...recs].sort((a,b) => b.createdAt.localeCompare(a.createdAt)).slice(0,5);
+  const el = document.getElementById('d-recent');
+  if (!recent.length) {
+    el.innerHTML = '<div class="empty"><div class="empty-ic">📭</div><div class="empty-t" data-ur="کوئی ریکارڈ نہیں" data-en="No records">کوئی ریکارڈ نہیں</div></div>';
+    return;
+  }
+  el.innerHTML = recent.map(r => buildRC(r, true)).join('');
+}
+
+// ═══════════════════════════════════════════
+// BUILD RECORD CARD
+// ═══════════════════════════════════════════
+function buildRC(r, mini) {
+  const bal = getBal(r.phone);
+  const balLbl = bal > 0 ? '⚠️ بقایا: Rs '+bal.toFixed(0) : '✅ حساب صاف';
+  const balCol = bal > 0 ? 'background:var(--orangeL);color:var(--orange);' : 'background:var(--greenL);color:var(--green);';
+  return `<div class="rc">
+    <div class="rc-top">
+      <div>
+        <div class="rc-name" onclick="openCustDet('${esc(r.phone)}')">${esc(r.name)}</div>
+        <div class="rc-phone">📱 ${esc(r.phone)}</div>
+      </div>
+      <div class="rc-amt">Rs ${r.amount.toFixed(0)}</div>
+    </div>
+    <div class="rc-grid">
+      <div class="rc-cell"><div class="rc-cl">📅 تاریخ</div><div class="rc-cv">${r.date}</div></div>
+      <div class="rc-cell"><div class="rc-cl">⏱️ مدت</div><div class="rc-cv" style="color:var(--blue);">${r.durationStr}</div></div>
+      <div class="rc-cell"><div class="rc-cl">🟢 شروع</div><div class="rc-cv" style="color:var(--green);">${r.startTime}</div></div>
+      <div class="rc-cell"><div class="rc-cl">🔴 ختم</div><div class="rc-cv" style="color:var(--red);">${r.endTime}</div></div>
+    </div>
+    <div class="rc-status">
+      <span style="padding:4px 12px;border-radius:20px;font-size:11px;font-weight:700;${balCol}">${balLbl}</span>
+      ${r.paidNow ? '<span style="font-size:11px;color:var(--green);font-weight:600;">ساتھ ادا: Rs '+r.paidNow.toFixed(0)+'</span>' : ''}
+    </div>
+    ${mini ? '' : `<div class="rc-actions">
+      <button class="rc-act receipt" data-id="${r.id}" onclick="openReceipt(this.dataset.id)">🧾 رسید</button>
+      <button class="rc-act edit" data-id="${r.id}" onclick="openEditRec(this.dataset.id)">✏️ ترمیم</button>
+      <button class="rc-act del" data-id="${r.id}" onclick="delRec(this.dataset.id)">🗑️ حذف</button>
+    </div>`}
+  </div>`;
+}
+
+// ═══════════════════════════════════════════
+// SALE PAGE
+// ═══════════════════════════════════════════
+function onPhoneInput() {
+  const phone = document.getElementById('sPhone').value.trim();
+  const name = document.getElementById('sName').value.trim();
+  const ac = document.getElementById('phoneAC');
+  const q = (phone || name).toLowerCase();
+  if (!q) { ac.style.display = 'none'; return; }
+  const seen = {};
+  recs.forEach(r => { if (!seen[r.phone]) seen[r.phone] = r.name; });
+  const matches = Object.entries(seen)
+    .filter(([ph,nm]) => ph.includes(q) || nm.toLowerCase().includes(q))
+    .slice(0,6);
+  if (!matches.length) { ac.style.display = 'none'; return; }
+  ac.innerHTML = matches.map(([ph,nm]) =>
+    `<div class="ac-item" onmousedown="pickPhone('${esc(ph)}','${esc(nm)}')">`+
+    `<strong>${esc(nm)}</strong> <span style="color:var(--t3)">${ph}</span></div>`
+  ).join('');
+  ac.style.display = 'block';
+}
+function closeAC() { document.getElementById('phoneAC').style.display = 'none'; }
+function pickPhone(ph, nm) {
+  document.getElementById('sPhone').value = ph;
+  document.getElementById('sName').value = nm;
+  closeAC();
+}
+
+function calcM() {
+  const s = document.getElementById('sStart').value;
+  const e = document.getElementById('sEnd').value;
+  const rate = parseFloat(document.getElementById('sRate').value) || 0;
+  const hint = document.getElementById('sCalcHint');
+  const box = document.getElementById('sCalcBox');
+  if (!s || !e || !rate) { hint.style.display='block'; box.style.display='none'; return; }
+  let sms = tms(s+':00'), ems = tms(e+':00');
+  if (ems <= sms) ems += 86400000;
+  const dur = ems - sms;
+  const amt = (dur / 60000) * (rate / 60);
+  document.getElementById('sc-dur').textContent = fmtDur(dur);
+  document.getElementById('sc-start').textContent = fmt12(s);
+  document.getElementById('sc-end').textContent = fmt12(e);
+  document.getElementById('sc-total').textContent = 'Rs ' + Math.round(amt);
+  hint.style.display = 'none'; box.style.display = 'block';
+}
+
+function previewBal() {
+  const paid = parseFloat(document.getElementById('sPayNow').value) || 0;
+  const totEl = document.getElementById('sc-total');
+  const totStr = totEl.textContent.replace('Rs','').trim();
+  const total = parseFloat(totStr) || 0;
+  const rem = Math.max(0, total - paid);
+  const prev = document.getElementById('sPayPrev');
+  if (paid > 0) {
+    document.getElementById('sPaidShow').textContent = 'Rs ' + paid.toFixed(0);
+    document.getElementById('sRemain').textContent = 'Rs ' + rem.toFixed(0);
+    prev.style.display = 'block';
+  } else {
+    prev.style.display = 'none';
+  }
+}
+
+function saveRec() {
+  const name = document.getElementById('sName').value.trim();
+  const phone = document.getElementById('sPhone').value.trim();
+  const date = document.getElementById('sDate').value;
+  const rate = parseFloat(document.getElementById('sRate').value) || 0;
+  const s = document.getElementById('sStart').value;
+  const e = document.getElementById('sEnd').value;
+  if (!name) { toast('❌ گاہک کا نام درج کریں'); return; }
+  if (!phone) { toast('❌ فون نمبر درج کریں'); return; }
+  if (!date) { toast('❌ تاریخ منتخب کریں'); return; }
+  if (!rate) { toast('❌ ریٹ درج کریں'); return; }
+  if (!s) { toast('❌ شروع وقت درج کریں'); return; }
+  if (!e) { toast('❌ ختم وقت درج کریں'); return; }
+  let sms = tms(s+':00'), ems = tms(e+':00');
+  if (ems <= sms) ems += 86400000;
+  const dur = ems - sms;
+  const amt = (dur / 60000) * (rate / 60);
+  const paidNow = parseFloat(document.getElementById('sPayNow').value) || 0;
+  const rec = {
+    id: Date.now().toString(),
+    name, phone, date,
+    startTime: s+':00', endTime: e+':00',
+    durationMs: dur, durationStr: fmtDur(dur),
+    ratePerHour: rate, amount: Math.round(amt),
+    paidNow, createdAt: new Date().toISOString()
+  };
+  recs.unshift(rec); saveR();
+  // Reset form
+  document.getElementById('sStart').value = '';
+  document.getElementById('sEnd').value = '';
+  document.getElementById('sPayNow').value = '';
+  document.getElementById('sCalcBox').style.display = 'none';
+  document.getElementById('sCalcHint').style.display = 'block';
+  document.getElementById('sPayPrev').style.display = 'none';
+  updateDash();
+  toast('✅ ریکارڈ محفوظ ہو گیا');
+}
+
+// ═══════════════════════════════════════════
+// RECORDS PAGE
+// ═══════════════════════════════════════════
+function renderRecs() {
+  const q = (document.getElementById('recSearch').value || '').toLowerCase();
+  const filtered = recs.filter(r => !q || r.name.toLowerCase().includes(q) || r.phone.includes(q));
+  const el = document.getElementById('recs-body');
+  if (!filtered.length) {
+    el.innerHTML = '<div class="empty"><div class="empty-ic">📭</div><div class="empty-t">کوئی ریکارڈ نہیں</div></div>';
+    return;
+  }
+  el.innerHTML = filtered.map(r => buildRC(r, false)).join('');
+}
+
+function delRec(id) {
+  if (!confirm('کیا واقعی یہ ریکارڈ حذف کریں؟')) return;
+  recs = recs.filter(r => r.id !== id); saveR();
+  renderRecs(); updateDash();
+  toast('✅ ریکارڈ حذف ہو گیا');
+}
+
+// ═══════════════════════════════════════════
+// EDIT RECORD
+// ═══════════════════════════════════════════
+function openEditRec(id) {
+  const r = recs.find(x => x.id === id);
+  if (!r) return;
+  document.getElementById('er-id').value = id;
+  document.getElementById('er-name').value = r.name;
+  document.getElementById('er-phone').value = r.phone;
+  document.getElementById('er-date').value = r.date;
+  document.getElementById('er-rate').value = r.ratePerHour;
+  document.getElementById('er-start').value = r.startTime;
+  document.getElementById('er-end').value = r.endTime;
+  document.getElementById('er-amt').value = '';
+  erCalc();
+  openMol('mol-editRec');
+}
+function erCalc() {
+  const s = document.getElementById('er-start').value;
+  const e = document.getElementById('er-end').value;
+  const rate = parseFloat(document.getElementById('er-rate').value) || 0;
+  if (!s || !e) return;
+  let sms = tms(s), ems = tms(e);
+  if (!s.includes(':')) return;
+  if (ems <= sms) ems += 86400000;
+  const amt = ((ems - sms) / 60000) * (rate / 60);
+  document.getElementById('er-calc').textContent = 'Rs ' + amt.toFixed(2);
+}
+function saveEditRec() {
+  const id = document.getElementById('er-id').value;
+  const idx = recs.findIndex(r => r.id === id);
+  if (idx < 0) return;
+  const name = document.getElementById('er-name').value.trim();
+  const phone = document.getElementById('er-phone').value.trim();
+  const date = document.getElementById('er-date').value;
+  const rate = parseFloat(document.getElementById('er-rate').value) || 0;
+  const s = document.getElementById('er-start').value;
+  const e = document.getElementById('er-end').value;
+  if (!name || !phone || !date || !s || !e) { toast('❌ تمام معلومات درج کریں'); return; }
+  let sms = tms(s), ems = tms(e);
+  if (ems <= sms) ems += 86400000;
+  const dur = ems - sms;
+  const calcAmt = (dur / 60000) * (rate / 60);
+  const ovr = document.getElementById('er-amt').value;
+  const finalAmt = ovr !== '' ? parseFloat(ovr) : parseFloat(calcAmt.toFixed(2));
+  recs[idx] = { ...recs[idx], name, phone, date, startTime: s, endTime: e, ratePerHour: rate, durationMs: dur, durationStr: fmtDur(dur), amount: finalAmt };
+  saveR(); renderRecs(); updateDash();
+  closeMol('mol-editRec'); toast('✅ ریکارڈ اپڈیٹ ہو گیا');
+}
+
+// ═══════════════════════════════════════════
+// RECEIPT
+// ═══════════════════════════════════════════
+let _recR = null;
+function openReceipt(id) {
+  _recR = recs.find(r => r.id === id);
+  if (!_recR) return;
+  const r = _recR;
+  document.getElementById('receiptHTML').innerHTML =
+    `================================\n` +
+    `    TubeWell Water System\n` +
+    `    ABDUL AZIZ BHATTI\n` +
+    `================================\n` +
+    `گاہک  : ${r.name}\n` +
+    `فون   : ${r.phone}\n` +
+    `تاریخ : ${r.date}\n` +
+    `--------------------------------\n` +
+    `شروع  : ${r.startTime}\n` +
+    `ختم   : ${r.endTime}\n` +
+    `مدت   : ${r.durationStr}\n` +
+    `ریٹ   : Rs ${r.ratePerHour}/گھنٹہ\n` +
+    `--------------------------------\n` +
+    `کل رقم  : Rs ${r.amount.toFixed(0)}\n` +
+    (r.paidNow ? `ادا کی   : Rs ${r.paidNow.toFixed(0)}\n` : '') +
+    `بقایا   : Rs ${getBal(r.phone).toFixed(0)}\n` +
+    `================================\n` +
+    `    شکریہ — جزاک اللہ خیر\n` +
+    `================================`;
+  openMol('mol-receipt');
+}
+function printR() {
+  if (!_recR) return;
+  const w = window.open('','_blank');
+  w.document.write('<pre style="font-family:monospace;font-size:14px;">' + document.getElementById('receiptHTML').textContent + '</pre>');
+  w.print(); w.close();
+}
+function waR() {
+  if (!_recR) return;
+  const txt = document.getElementById('receiptHTML').textContent;
+  window.open('https://wa.me/?text=' + encodeURIComponent(txt));
+}
+
+// ═══════════════════════════════════════════
+// HISTORY PAGE
+// ═══════════════════════════════════════════
+function renderHist() {
+  const q = (document.getElementById('histSearch').value || '').toLowerCase();
+  const seen = {};
+  recs.forEach(r => { if (!seen[r.phone]) seen[r.phone] = r.name; });
+  const custs = Object.entries(seen)
+    .filter(([ph,nm]) => !q || ph.includes(q) || nm.toLowerCase().includes(q));
+  const el = document.getElementById('hist-body');
+  if (!custs.length) {
+    el.innerHTML = '<div class="empty"><div class="empty-ic">👤</div><div class="empty-t">کوئی گاہک نہیں</div></div>';
+    return;
+  }
+  el.innerHTML = custs.map(([ph,nm]) => {
+    const bal = getBal(ph);
+    const cnt = recs.filter(r => r.phone === ph).length;
+    return `<div class="hcust" onclick="openCustDet('${esc(ph)}')">
+      <div class="hcust-h">
+        <div><div class="hcust-n">${esc(nm)}</div><div class="hcust-p">📱 ${ph} &nbsp;|&nbsp; ریکارڈ: ${cnt}</div></div>
+        <div style="text-align:right;">
+          <div style="font-size:15px;font-weight:800;color:${bal>0?'var(--orange)':'var(--green)'};">Rs ${bal.toFixed(0)}</div>
+          <div style="font-size:10px;color:var(--t3);">${bal>0?'بقایا':'صاف'}</div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ═══════════════════════════════════════════
+// CUSTOMER DETAIL MODAL
+// ═══════════════════════════════════════════
+function openCustDet(phone) {
+  _cdPhone = phone;
+  const custRecs = recs.filter(r => r.phone === phone);
+  const name = custRecs[0] ? custRecs[0].name : phone;
+  const bal = getBal(phone);
+  const totalBill = getTotalBill(phone);
+  const totalPaid = getTotalPaid(phone);
+  const totalMs = custRecs.reduce((s,r) => s + r.durationMs, 0);
+
+  document.getElementById('cd-name').textContent = name;
+  document.getElementById('cd-phone').textContent = '📱 ' + phone;
+  document.getElementById('cd-bal').textContent = 'Rs ' + bal.toFixed(0);
+  document.getElementById('cd-time').textContent = fmtHM(totalMs);
+  document.getElementById('cd-total').textContent = 'Rs ' + totalBill.toFixed(0);
+  document.getElementById('cd-paid').textContent = 'Rs ' + totalPaid.toFixed(0);
+
+  // Build ledger
+  const items = [];
+  custRecs.forEach(r => items.push({ date: r.date, type: 'bill', r }));
+  pays.filter(p => p.phone === phone).forEach(p => items.push({ date: p.date, type: 'pay', p }));
+  items.sort((a,b) => a.date.localeCompare(b.date));
+
+  let runBal = 0;
+  const html = items.map(item => {
+    if (item.type === 'bill') {
+      const r = item.r;
+      runBal += r.amount;
+      if (r.paidNow) runBal -= r.paidNow;
+      const bc = runBal > 0 ? 'color:var(--orange);' : 'color:var(--green);';
+      return `<div class="te bill">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+          <div>
+            <div style="font-size:12px;font-weight:700;color:var(--blue);">💧 بل — ${r.date}</div>
+            <div style="font-size:11px;color:var(--t3);">⏱️ ${r.durationStr} | ریٹ: ${r.ratePerHour}</div>
+            ${r.paidNow ? '<div style="font-size:11px;color:var(--green);">ساتھ ادا: Rs '+r.paidNow.toFixed(0)+'</div>' : ''}
+          </div>
+          <div style="text-align:right;">
+            <div style="font-size:14px;font-weight:800;color:var(--t1);">Rs ${r.amount.toFixed(0)}</div>
+            <div style="font-size:10px;font-weight:700;${bc}">بقایا: Rs ${runBal.toFixed(0)}</div>
+            <div style="display:flex;gap:4px;margin-top:4px;justify-content:flex-end;">
+              <button class="ibtn e" data-id="${r.id}" onclick="event.stopPropagation();openEditRec(this.dataset.id)">✏️</button>
+              <button class="ibtn d" data-id="${r.id}" onclick="event.stopPropagation();delRecFromCust(this.dataset.id)">🗑️</button>
+            </div>
+          </div>
+        </div>
+      </div>`;
+    } else {
+      const p = item.p;
+      runBal -= p.amount;
+      const bc = runBal > 0 ? 'color:var(--orange);' : 'color:var(--green);';
+      return `<div class="te pay">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+          <div>
+            <div style="font-size:12px;font-weight:700;color:var(--green);">💵 ادائیگی — ${p.date}</div>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-size:14px;font-weight:800;color:var(--green);">-Rs ${p.amount.toFixed(0)}</div>
+            <div style="font-size:10px;font-weight:700;${bc}">بقایا: Rs ${runBal.toFixed(0)}</div>
+            <div style="display:flex;gap:4px;margin-top:4px;justify-content:flex-end;">
+              <button class="ibtn e" data-id="${p.id}" onclick="event.stopPropagation();openEditPay(this.dataset.id)">✏️</button>
+              <button class="ibtn d" data-id="${p.id}" onclick="event.stopPropagation();delPay(this.dataset.id)">🗑️</button>
+            </div>
+          </div>
+        </div>
+      </div>`;
+    }
+  }).join('') || '<div class="empty" style="padding:20px;"><div>کوئی ریکارڈ نہیں</div></div>';
+
+  document.getElementById('cd-ledger').innerHTML = html;
+  document.getElementById('addPayForm').style.display = 'none';
+  document.getElementById('apDate').value = todayStr();
+  openMol('mol-cust');
+}
+
+function delRecFromCust(id) {
+  if (!confirm('کیا واقعی یہ بل حذف کریں؟')) return;
+  recs = recs.filter(r => r.id !== id); saveR();
+  updateDash(); renderRecs();
+  openCustDet(_cdPhone);
+  toast('✅ بل حذف ہو گیا');
+}
+
+function openAddPay() { document.getElementById('addPayForm').style.display = 'block'; }
+function closeAddPay() { document.getElementById('addPayForm').style.display = 'none'; }
+
+function submitPay() {
+  const amt = parseFloat(document.getElementById('apAmt').value) || 0;
+  const date = document.getElementById('apDate').value;
+  if (!amt) { toast('❌ رقم درج کریں'); return; }
+  if (!date) { toast('❌ تاریخ درج کریں'); return; }
+  const custRecs = recs.filter(r => r.phone === _cdPhone);
+  const name = custRecs[0] ? custRecs[0].name : _cdPhone;
+  pays.push({ id: Date.now().toString(), phone: _cdPhone, name, amount: amt, date, createdAt: new Date().toISOString() });
+  saveP(); updateDash();
+  document.getElementById('apAmt').value = '';
+  openCustDet(_cdPhone);
+  toast('✅ ادائیگی محفوظ ہو گئی');
+}
+
+// ═══════════════════════════════════════════
+// EDIT/DELETE PAYMENT
+// ═══════════════════════════════════════════
+function openEditPay(id) {
+  const p = pays.find(x => x.id === id);
+  if (!p) return;
+  document.getElementById('ep-id').value = id;
+  document.getElementById('ep-amt').value = p.amount;
+  document.getElementById('ep-date').value = p.date;
+  openMol('mol-editPay');
+}
+function saveEditPay() {
+  const id = document.getElementById('ep-id').value;
+  const amt = parseFloat(document.getElementById('ep-amt').value) || 0;
+  const date = document.getElementById('ep-date').value;
+  if (!amt || !date) { toast('❌ رقم اور تاریخ درج کریں'); return; }
+  const idx = pays.findIndex(p => p.id === id);
+  if (idx < 0) return;
+  pays[idx] = { ...pays[idx], amount: amt, date };
+  saveP(); updateDash();
+  closeMol('mol-editPay');
+  if (_cdPhone) openCustDet(_cdPhone);
+  if (_ppPhone) loadPP(_ppPhone);
+  toast('✅ ادائیگی اپڈیٹ ہو گئی');
+}
+function delPay(id) {
+  if (!confirm('کیا واقعی یہ ادائیگی حذف کریں؟')) return;
+  pays = pays.filter(p => p.id !== id); saveP(); updateDash();
+  if (_cdPhone) openCustDet(_cdPhone);
+  if (_ppPhone) loadPP(_ppPhone);
+  toast('✅ ادائیگی حذف ہو گئی');
+}
+
+// ═══════════════════════════════════════════
+// REPORTS
+// ═══════════════════════════════════════════
+function setRange(t) {
+  const now = new Date(), y = now.getFullYear(), m = now.getMonth(), d = now.getDate();
+  let from, to = todayStr();
+  if (t === 'today') from = todayStr();
+  else if (t === 'week') { const s = new Date(now); s.setDate(d - s.getDay()); from = s.toISOString().slice(0,10); }
+  else if (t === 'month') from = y+'-'+pad(m+1)+'-01';
+  else { from = '2020-01-01'; to = '2099-12-31'; }
+  document.getElementById('rFrom').value = from;
+  document.getElementById('rTo').value = to;
+}
+function genReport() {
+  const from = document.getElementById('rFrom').value;
+  const to = document.getElementById('rTo').value;
+  if (!from || !to) { toast('❌ تاریخ منتخب کریں'); return; }
+  const filtered = recs.filter(r => r.date >= from && r.date <= to);
+  if (!filtered.length) {
+    document.getElementById('rep-result').innerHTML = '<div class="empty"><div class="empty-ic">📭</div><div class="empty-t">کوئی ریکارڈ نہیں</div></div>';
+    return;
+  }
+  const totalMs = filtered.reduce((s,r) => s + r.durationMs, 0);
+  const totalAmt = filtered.reduce((s,r) => s + r.amount, 0);
+  const received = filtered.reduce((s,r) => s + (r.paidNow||0), 0)
+    + pays.filter(p => p.date >= from && p.date <= to).reduce((s,p) => s + p.amount, 0);
+  const pending = totalAmt - received;
+
+  const byPhone = {};
+  filtered.forEach(r => {
+    if (!byPhone[r.phone]) byPhone[r.phone] = { name: r.name, amt: 0, ms: 0, cnt: 0 };
+    byPhone[r.phone].amt += r.amount;
+    byPhone[r.phone].ms += r.durationMs;
+    byPhone[r.phone].cnt++;
+  });
+
+  const custRows = Object.entries(byPhone).map(([ph,d]) =>
+    `<div style="display:flex;justify-content:space-between;padding:8px 12px;border-bottom:1px solid var(--border);font-size:12px;">
+      <div><div style="font-weight:700;">${esc(d.name)}</div><div style="color:var(--t3);">${ph} | ${d.cnt} ریکارڈ | ${fmtHM(d.ms)}</div></div>
+      <div style="font-weight:800;color:var(--green);">Rs ${d.amt.toFixed(0)}</div>
+    </div>`
+  ).join('');
+
+  document.getElementById('rep-result').innerHTML =
+    `<div class="cbox">
+      <div class="crow"><span>⏱️ کل وقت</span><span>${fmtHM(totalMs)}</span></div>
+      <div class="crow"><span>🧾 کل بل</span><span>Rs ${totalAmt.toFixed(0)}</span></div>
+      <div class="crow"><span>✅ وصول شدہ</span><span style="color:var(--green);">Rs ${received.toFixed(0)}</span></div>
+      <div class="crow tot"><span>⚠️ بقایا</span><span style="color:var(--orange);">Rs ${Math.max(0,pending).toFixed(0)}</span></div>
+    </div>
+    <div style="border:1px solid var(--border);border-radius:var(--rad);overflow:hidden;">
+      <div style="background:var(--greenL);padding:8px 12px;font-size:12px;font-weight:700;border-bottom:1px solid var(--border);">👤 گاہک کی تفصیل</div>
+      ${custRows}
+    </div>`;
+}
+
+// ═══════════════════════════════════════════
+// EXPORT
+// ═══════════════════════════════════════════
+function exportCSV() {
+  if (!recs.length) { toast('❌ کوئی ریکارڈ نہیں'); return; }
+  const rows = [['نام','فون','تاریخ','شروع','ختم','مدت','ریٹ','رقم','ادا']];
+  recs.forEach(r => rows.push([r.name,r.phone,r.date,r.startTime,r.endTime,r.durationStr,r.ratePerHour,r.amount,r.paidNow||0]));
+  const csv = rows.map(r => r.join(',')).join('\n');
+  const a = document.createElement('a');
+  a.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv);
+  a.download = 'tubewell-'+todayStr()+'.csv';
+  a.click();
+}
+function exportXLS() {
+  if (!recs.length) { toast('❌ کوئی ریکارڈ نہیں'); return; }
+  let tbl = '<table><tr><th>نام</th><th>فون</th><th>تاریخ</th><th>شروع</th><th>ختم</th><th>مدت</th><th>ریٹ</th><th>رقم</th><th>ادا</th></tr>';
+  recs.forEach(r => { tbl += `<tr><td>${r.name}</td><td>${r.phone}</td><td>${r.date}</td><td>${r.startTime}</td><td>${r.endTime}</td><td>${r.durationStr}</td><td>${r.ratePerHour}</td><td>${r.amount}</td><td>${r.paidNow||0}</td></tr>`; });
+  tbl += '</table>';
+  const blob = new Blob(['\ufeff'+tbl], {type:'application/vnd.ms-excel;charset=utf-8'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'tubewell-'+todayStr()+'.xls';
+  a.click();
+}
+
+function fillFullDue() {
+  if (!_ppPhone) return;
+  const bal = getBal(_ppPhone);
+  if (bal <= 0) { toast('✅ کوئی بقایا نہیں'); return; }
+  document.getElementById('ppAmt').value = bal.toFixed(0);
+  ppPreview();
+}
+
+// ═══════════════════════════════════════════
+// PAYMENT PAGE
+// ═══════════════════════════════════════════
+function ppSearchFn() {
+  const q = document.getElementById('ppSearch').value.trim().toLowerCase();
+  const ac = document.getElementById('ppAC');
+  if (!q) { ac.style.display = 'none'; return; }
+  const seen = {};
+  recs.forEach(r => { if (!seen[r.phone]) seen[r.phone] = r.name; });
+  const matches = Object.entries(seen)
+    .filter(([ph,nm]) => ph.includes(q) || nm.toLowerCase().includes(q))
+    .slice(0,8);
+  if (!matches.length) { ac.style.display = 'none'; return; }
+  ac.innerHTML = matches.map(([ph,nm]) =>
+    `<div class="iac-item" onclick="pickPP('${esc(ph)}','${esc(nm)}')">`+
+    `<strong>${esc(nm)}</strong><div style="font-size:11px;color:var(--t3);">${ph}</div></div>`
+  ).join('');
+  ac.style.display = 'block';
+}
+function pickPP(ph, nm) {
+  document.getElementById('ppSearch').value = nm + ' — ' + ph;
+  document.getElementById('ppAC').style.display = 'none';
+  loadPP(ph);
+}
+function loadPP(phone) {
+  _ppPhone = phone;
+  const custRecs = recs.filter(r => r.phone === phone);
+  const name = custRecs[0] ? custRecs[0].name : phone;
+  const bill = getTotalBill(phone);
+  const paid = getTotalPaid(phone);
+  const bal = getBal(phone);
+  const custPays = pays.filter(p => p.phone === phone).sort((a,b) => b.date.localeCompare(a.date));
+  const lastDate = custPays[0] ? custPays[0].date : '--';
+
+  document.getElementById('ppName').textContent = name;
+  document.getElementById('ppPhone').textContent = '📱 ' + phone;
+  document.getElementById('ppBill').textContent = 'Rs ' + bill.toFixed(0);
+  document.getElementById('ppPaid').textContent = 'Rs ' + paid.toFixed(0);
+  document.getElementById('ppLast').textContent = lastDate;
+  document.getElementById('ppDue').textContent = 'Rs ' + bal.toFixed(0);
+  document.getElementById('ppDate').value = todayStr();
+  document.getElementById('ppAmt').value = bal > 0 ? bal.toFixed(0) : '';
+  document.getElementById('ppPrev').style.display = 'none';
+
+  // Payment history with edit/delete
+  const histEl = document.getElementById('ppHist');
+  if (!custPays.length) {
+    histEl.innerHTML = '<div class="empty" style="padding:20px;"><div class="empty-ic" style="font-size:36px;">💳</div><div class="empty-t">ابھی تک کوئی ادائیگی نہیں</div><div class="empty-s">اوپر رقم درج کر کے ادائیگی محفوظ کریں</div></div>';
+  } else {
+    histEl.innerHTML = custPays.map(p =>
+      `<div class="pay-row">
+        <div>
+          <div style="font-size:13px;font-weight:700;color:var(--green);">💵 Rs ${p.amount.toFixed(0)}</div>
+          <div style="font-size:11px;color:var(--t3);">📅 ${p.date}</div>
+        </div>
+        <div class="pay-btns">
+          <button class="ibtn e" data-id="${p.id}" onclick="openEditPay(this.dataset.id)">✏️ ترمیم</button>
+          <button class="ibtn d" data-id="${p.id}" onclick="delPay(this.dataset.id)">🗑️ حذف</button>
+        </div>
+      </div>`
+    ).join('');
+  }
+
+  document.getElementById('ppForm').style.display = 'block';
+  document.getElementById('ppEmpty').style.display = 'none';
+}
+function ppPreview() {
+  const amt = parseFloat(document.getElementById('ppAmt').value) || 0;
+  const bal = getBal(_ppPhone);
+  const rem = Math.max(0, bal - amt);
+  const prev = document.getElementById('ppPrev');
+  if (amt > 0) {
+    document.getElementById('ppPrevPaid').textContent = 'Rs ' + amt.toFixed(0);
+    document.getElementById('ppPrevRem').textContent = 'Rs ' + rem.toFixed(0);
+    const remEl = document.getElementById('ppPrevRem');
+    if (amt > bal && bal > 0) {
+      remEl.style.color = 'var(--red)';
+      remEl.textContent = '⚠️ زیادہ رقم! Rs ' + (amt - bal).toFixed(0) + ' اضافی';
+    } else if (rem === 0) {
+      remEl.style.color = 'var(--green)';
+      remEl.textContent = '✅ حساب صاف ہو جائے گا';
+    } else {
+      remEl.style.color = 'var(--orange)';
+      remEl.textContent = 'Rs ' + rem.toFixed(0);
+    }
+    prev.style.display = 'block';
+  } else {
+    prev.style.display = 'none';
+  }
+}
+function savePP() {
+  if (!_ppPhone) { toast('❌ گاہک منتخب کریں'); return; }
+  const amt = parseFloat(document.getElementById('ppAmt').value) || 0;
+  const date = document.getElementById('ppDate').value;
+  if (!amt) { toast('❌ رقم درج کریں'); return; }
+  if (!date) { toast('❌ تاریخ درج کریں'); return; }
+  const custRecs = recs.filter(r => r.phone === _ppPhone);
+  const name = custRecs[0] ? custRecs[0].name : _ppPhone;
+  pays.push({ id: Date.now().toString(), phone: _ppPhone, name, amount: amt, date, createdAt: new Date().toISOString() });
+  saveP(); loadPP(_ppPhone); updateDash(); ppPreview();
+  toast('✅ ادائیگی محفوظ ہو گئی');
+}
+function resetPP() {
+  _ppPhone = '';
+  document.getElementById('ppSearch').value = '';
+  document.getElementById('ppAC').style.display = 'none';
+  document.getElementById('ppForm').style.display = 'none';
+  document.getElementById('ppEmpty').style.display = 'block';
+}
+
+// ═══════════════════════════════════════════
+// LANGUAGE
+// ═══════════════════════════════════════════
+function toggleLang() {
+  curLang = curLang === 'ur' ? 'en' : 'ur';
+  localStorage.setItem('twLang', curLang);
+  applyLang();
+}
+function applyLang() {
+  const en = curLang === 'en';
+  document.getElementById('langBtn').textContent = en ? 'اردو | EN' : 'EN | اردو';
+  document.querySelectorAll('[data-ur]').forEach(el => {
+    el.textContent = en ? (el.dataset.en || el.dataset.ur) : el.dataset.ur;
+  });
+  document.querySelectorAll('[data-pur]').forEach(el => {
+    el.placeholder = en ? (el.dataset.pen || '') : el.dataset.pur;
+  });
+  updateDash(); renderRecs();
+}
+
+// ═══════════════════════════════════════════
+// HEADER DATE
+// ═══════════════════════════════════════════
+function setHeaderDate() {
+  const d = new Date();
+  const days = ['اتوار','پیر','منگل','بدھ','جمعرات','جمعہ','ہفتہ'];
+  const months = ['جنوری','فروری','مارچ','اپریل','مئی','جون','جولائی','اگست','ستمبر','اکتوبر','نومبر','دسمبر'];
+  document.getElementById('hdrDate').innerHTML =
+    `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}<br>${days[d.getDay()]}`;
+}
+
+// ═══════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════
+function init() {
+  setHeaderDate();
+  const today = todayStr();
+  document.getElementById('sDate').value = today;
+  document.getElementById('sRate').value = '500';
+  updateDash();
+  applyLang();
+}
+init();
+</script>
+</body>
+</html>
